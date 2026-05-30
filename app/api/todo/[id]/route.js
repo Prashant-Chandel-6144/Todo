@@ -4,7 +4,7 @@ import Todo from "@/lib/models/todo.model";
 
 export async function PUT(req, { params }) {
   await connectDB();
-  const { id } = params;
+  const { id } =await  params;
   const { title, description, status, priority, dueDate, userId } = await req.json();
 
   const todo = await Todo.findOneAndUpdate(
