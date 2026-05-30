@@ -22,15 +22,12 @@ export async function PUT(req, { params }) {
 
 export async function DELETE(req, { params }) {
   await connectDB();
-  const { id } = params;
+  const { id } = await params; // ← add await
   const { searchParams } = new URL(req.url);
   const userId = searchParams.get("userId");
-
   const todo = await Todo.findOneAndDelete({ _id: id, userId });
-
   if (!todo) {
     return Response.json({ message: "Todo not found or unauthorized" }, { status: 404 });
   }
-
   return Response.json({ message: "Deleted" }, { status: 200 });
 }

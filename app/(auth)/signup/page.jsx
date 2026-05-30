@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const fontLink = `@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800;900&display=swap');`;
 
 const C = {
   bg:        "#0b0b0b",
@@ -102,8 +101,8 @@ export default function SignupPage() {
 
   return (
     <>
-      <style>{fontLink}{`* { box-sizing: border-box; margin: 0; padding: 0; }`}</style>
-      <div style={{ minHeight: "100vh", background: C.bg, color: C.text, fontFamily: "'Sora', sans-serif", display: "flex", flexDirection: "column" }}>
+      <style>{`* { box-sizing: border-box; margin: 0; padding: 0; }`}</style>
+      <div style={{ minHeight: "100vh", background: C.bg, color: C.text, fontFamily: "inherit", display: "flex", flexDirection: "column" }}>
 
         {/* Navbar */}
         <nav style={{
