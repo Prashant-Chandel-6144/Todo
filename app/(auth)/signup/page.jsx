@@ -465,10 +465,12 @@ export default function SignupPage() {
                   { icon: "G", label: "Google" },
                   { icon: "⌥", label: "GitHub" },
                 ].map(({ icon, label }) => (
+                  
                   <button
                     key={label}
                     type="button"
                     className="oauth-btn"
+                    
                     onClick={() => {
                       if (label === "Google") {
                         signIn("google", { callbackUrl: "/todos" });

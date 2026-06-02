@@ -8,6 +8,8 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  
+
 
   callbacks: {
     async signIn({ user }) {
