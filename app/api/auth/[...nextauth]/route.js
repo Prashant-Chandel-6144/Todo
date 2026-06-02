@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/db";
+import User from "@/lib/models/user.model";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
