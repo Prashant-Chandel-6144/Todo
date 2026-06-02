@@ -18,7 +18,7 @@ const handler = NextAuth({
       const existingUser = await User.findOne({ email: user.email });
       if (!existingUser) {
         const name = user.name.split(" ");
-        const newUser = new User.create({
+        const newUser = await User.create({
           fname: name[0],
           lname: name[1] || "",
           email: user.email,
