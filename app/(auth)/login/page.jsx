@@ -423,6 +423,8 @@ export default function LoginPage() {
                     onClick={() => {
                       if (label === "Google") {
                         signIn("google", { callbackUrl: "/todos" });
+                      }else if (label === "GitHub") {
+                        signIn("github", { callbackUrl: "/todos" });
                       }
                     }}
                     style={{
