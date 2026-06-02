@@ -8,12 +8,21 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  
-
 
   callbacks: {
     async signIn({ user }) {
+      await connectDB();
       console.log(user);
+      const existingUser = await User.findOne({ email: user.email });
+      if (!existingUser) {
+        const name = user.name.split(" ");
+        const newUser = new User.create({
+          fname: name[0],
+          lname: name[1] || "",
+          email: user.email,
+          image: user.image,
+        });
+      }
       return true;
     },
   },
