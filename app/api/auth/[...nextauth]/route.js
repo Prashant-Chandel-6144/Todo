@@ -4,7 +4,7 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -16,14 +16,17 @@ const handler = NextAuth({
     }),
   ],
 
+  pages: {
+    signIn: "/login",   // ← ADD THIS
+  },
+
   callbacks: {
     async signIn({ user }) {
       await connectDB();
-      console.log(user);
       const existingUser = await User.findOne({ email: user.email });
       if (!existingUser) {
         const name = user.name.split(" ");
-        const newUser = await User.create({
+        await User.create({
           fname: name[0],
           lname: name[1] || "",
           email: user.email,
@@ -32,7 +35,12 @@ const handler = NextAuth({
       }
       return true;
     },
-  },
-});
 
+    async redirect({ url, baseUrl }) {   // ← ADD THIS
+      return baseUrl + "/todos";
+    },
+  },
+};
+
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
